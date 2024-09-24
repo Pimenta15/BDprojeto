@@ -1,10 +1,10 @@
-Nome do Aluno
+**Nome dos Alunos**
 João Pedro Maciel Pimenta, Samuel José Soares Souza dos Santos, Pedro Queiroga Crescêncio da Costa
 
-Descrição do Projeto
+**Descrição do Projeto**
 Este projeto consiste em um modelo de banco de dados completo para um shopping, abrangendo três áreas principais: uma clínica médica, um gerenciador de eventos e um restaurante. O sistema foi desenvolvido em três etapas: modelo conceitual, modelo lógico e modelo físico.
 
-Requisitos Mínimos
+**Requisitos Mínimos**
 Os requisitos mínimos implementados foram definidos para cada um dos casos a seguir:
 
 Caso 1 - Sistema de Gerenciamento da Clínica Médica
