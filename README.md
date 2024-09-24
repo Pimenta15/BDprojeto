@@ -4,7 +4,7 @@ João Pedro Maciel Pimenta, Samuel José Soares Souza dos Santos, Pedro Queiroga
 
   **Descrição do Projeto:**
 
-Este projeto consiste em um modelo de banco de dados completo para um shopping, abrangendo três áreas principais: uma clínica médica, um gerenciador de eventos e um restaurante. O sistema foi desenvolvido em três etapas: modelo conceitual, modelo lógico e modelo físico.
+Este projeto consiste em um modelo de banco de dados completo para um shopping usando BrModelo para modelar o Conceitual e gerar Relacional e Físico, abrangendo três áreas principais: uma clínica médica, um gerenciador de eventos e um restaurante. O sistema foi desenvolvido em três etapas: modelo conceitual, modelo lógico e modelo físico.
 
   **Requisitos Mínimos:**
 Os requisitos mínimos implementados foram definidos para cada um dos casos a seguir:
