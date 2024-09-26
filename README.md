@@ -61,7 +61,7 @@ Requisitos:
 5- Modelagem de especialização-generalização, considerando diferentes tipos de pedidos (para viagem, consumo no local) com atributos específicos.
 
 
-![PngDoBD](https://github.com/Pimenta15/BDprojeto/blob/master/Caso3.png)
+ ![PngDoBD](https://github.com/Pimenta15/BDprojeto/blob/master/Caso3.png)
 
   **Requisitos Adicionais**
 Além dos requisitos mínimos, o sistema foi expandido para incluir novas entidades e funcionalidades, conforme descrito abaixo:
