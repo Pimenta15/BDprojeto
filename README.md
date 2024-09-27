@@ -1,6 +1,6 @@
   **Nome dos Alunos:**
 
-João Pedro Maciel Pimenta, Samuel José Soares Souza dos Santos, Pedro Queiroga Crescêncio da Costa.
+João Pedro Maciel Pimenta, Samuel José Soares Souza dos Santos, Pedro Queiroga Crescêncio da Costa, Eduardo Camelo.
 
   **Descrição do Projeto:**
 
