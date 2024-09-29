@@ -1,285 +1,184 @@
-/* Lógico_1: */
-
-CREATE TABLE Paciente (
-    ID_Paciente INT PRIMARY KEY,
-    fk_Plano de Saúde_ID_Plano INT
+CREATE TABLE medico(
+    id_medico INT IDENTITY(1,1) NOT NULL,
+    CRM VARCHAR(10) NOT NULL,
+    espec VARCHAR(100) NOT NULL,
+    PRIMARY KEY(id_medico)
 );
 
-CREATE TABLE Médico (
-    ID_Medico INT PRIMARY KEY,
-    CRM VARCHAR,
-    Especialidade VARCHAR
+CREATE TABLE plano_saude(
+    id_plano INT IDENTITY(1,1) NOT NULL,
+    nome_plano VARCHAR(20) NOT NULL,
+    corbertura VARCHAR(20) NOT NULL,
+    mesalidade DECIMAL(10,2) NOT NULL,
+    PRIMARY KEY(id_plano)
 );
 
-CREATE TABLE Plano de Saúde (
-    ID_Plano INT PRIMARY KEY,
-    Nome_Plano VARCHAR,
-    Cobertura VARCHAR,
-    Mensalidade DECIMAL(10,2
+CREATE TABLE paciente(
+    id_paciente INT IDENTITY(1,1) NOT NULL,
+    id_paciente_plano INT, -- FK para plano_saude
+    PRIMARY KEY(id_paciente),
+    FOREIGN KEY (id_paciente_plano) REFERENCES plano_saude(id_plano)
 );
 
-CREATE TABLE Consulta (
-    ID_Consulta INT PRIMARY KEY,
-    Data_Consulta DATE,
-    Hora TIME,
-    Observações VARCHAR,
-    preço DECIMAL(10,2,
-    fk_Médico_ID_Medico INT,
-    fk_Paciente_ID_Paciente INT,
-    fk_Recepcionista_ID_Recepcionista INT
+CREATE TABLE recepcionista (
+    id_recepcionista INT IDENTITY(1,1) NOT NULL,
+    PRIMARY KEY(id_recepcionista)
 );
 
-CREATE TABLE Recepcionista (
-    ID_Recepcionista INT PRIMARY KEY
+CREATE TABLE consulta(
+    id_consulta INT IDENTITY(1,1) NOT NULL,
+    data_consulta DATE NOT NULL,
+    observacao JSON,
+    preco DECIMAL(10,2),
+    id_consulta_medico INT, -- Adicionado para a FK
+    id_consulta_paciente INT, -- Adicionado para a FK
+    id_consulta_recepcionista INT, -- Adicionado para a FK
+    PRIMARY KEY(id_consulta),
+    FOREIGN KEY (id_consulta_medico) REFERENCES medico(id_medico),
+    FOREIGN KEY (id_consulta_paciente) REFERENCES paciente(id_paciente),
+    FOREIGN KEY (id_consulta_recepcionista) REFERENCES recepcionista(id_recepcionista)
 );
 
-CREATE TABLE Evento (
-    ID_Evento INT PRIMARY KEY,
-    Nome_Evento VARCHAR,
-    Data_Inicio DATE,
-    Data_Fim DATE,
-    Local VARCHAR,
-    Tipo_Evento VARCHAR,
-    fk_Local_ID_Local INT
+CREATE TABLE participante(
+    id_participante INT IDENTITY(1,1) NOT NULL,
+    PRIMARY KEY(id_participante)
 );
 
-CREATE TABLE Participante (
-    ID_Participante INT PRIMARY KEY
+CREATE TABLE localizacao(
+    id_localizacao INT IDENTITY(1,1) NOT NULL,
+    nome_local VARCHAR(255) NOT NULL,
+    capacidade INT NOT NULL,
+    PRIMARY KEY(id_localizacao)
 );
 
-CREATE TABLE Local (
-    ID_Local INT PRIMARY KEY,
-    Nome_Local VARCHAR,
-    Capacidade INT,
-    Endereço VARCHAR
+CREATE TABLE evento(
+    id_evento INT IDENTITY(1,1) NOT NULL,
+    nome_evento VARCHAR(255) NOT NULL,
+    data_inicio DATE NOT NULL,
+    data_fim DATE,
+    tipo_evento VARCHAR(100) NOT NULL,
+    localizacao_evento INT, -- Adicionado para a FK
+    PRIMARY KEY(id_evento),
+    FOREIGN KEY (localizacao_evento) REFERENCES localizacao(id_localizacao)
 );
 
-CREATE TABLE Inscrição (
-    ID_Inscrição INT PRIMARY KEY,
-    Data_Inscrição DATE,
-    preço DECIMAL(10,2,
-    fk_Evento_ID_Evento INT
+CREATE TABLE inscricao(
+    id_inscricao INT IDENTITY(1,1) NOT NULL,
+    data_inscricao DATE NOT NULL,
+    preco DECIMAL(10,2) NOT NULL,
+    id_inscricao_evento INT, -- Adicionado para a FK
+    PRIMARY KEY(id_inscricao),
+    FOREIGN KEY (id_inscricao_evento) REFERENCES evento(id_evento)
 );
 
-CREATE TABLE Cliente_Restaurante (
-    ID_Cliente INT PRIMARY KEY
+CREATE TABLE client_restaurante(
+    id_cliente INT IDENTITY(1,1) NOT NULL,
+    PRIMARY KEY(id_cliente)
 );
 
-CREATE TABLE Mesa (
-    ID_Mesa INT PRIMARY KEY,
-    Capacidade INT
+CREATE TABLE mesa (
+    id_mesa INT IDENTITY(1,1) NOT NULL,
+    capacidade INT NOT NULL,
+    PRIMARY KEY(id_mesa)
 );
 
-CREATE TABLE Pedido (
-    ID_Pedido INT PRIMARY KEY,
-    Data_Pedido DATE,
-    Preço_total DECIMAL(10,2,
-    fk_Cliente_Restaurante_ID_Cliente INT
+CREATE TABLE pedido (
+    id_pedido INT IDENTITY(1,1) NOT NULL,
+    data_pedido DATE NOT NULL,
+    preco_total DECIMAL(10,2),
+    id_pedido_cliente INT, -- Adicionado para a FK
+    PRIMARY KEY(id_pedido),
+    FOREIGN KEY (id_pedido_cliente) REFERENCES client_restaurante(id_cliente)
 );
 
-CREATE TABLE Item (
-    ID_Item INT PRIMARY KEY,
-    Descrição VARCHAR,
-    Preço DECIMAL(10,2,
-    Quantidade INT
+CREATE TABLE item (
+    id_item INT IDENTITY(1,1) NOT NULL,
+    descricao VARCHAR(255),
+    preco DECIMAL(10,2),
+    quantidade INT NOT NULL,
+    PRIMARY KEY(id_item)
 );
 
-CREATE TABLE Para Viagem (
-    Endereço VARCHAR,
-    fk_Pedido_ID_Pedido INT PRIMARY KEY
+CREATE TABLE para_viagem (
+   endereco VARCHAR(255),
+   id_para_viagem INT, -- Adicionado para a FK
+   FOREIGN KEY (id_para_viagem) REFERENCES pedido(id_pedido)
 );
 
-CREATE TABLE Consumo Local (
-    fk_Pedido_ID_Pedido INT PRIMARY KEY,
-    fk_Mesa_ID_Mesa INT
+CREATE TABLE consumo_local (
+   id_consumo_pedido INT, -- Adicionado para a FK
+   id_consumo_mesa INT, -- Adicionado para a FK
+   FOREIGN KEY (id_consumo_pedido) REFERENCES pedido(id_pedido),
+   FOREIGN KEY (id_consumo_mesa) REFERENCES mesa(id_mesa)
 );
 
-CREATE TABLE Garçom (
-    ID_Garçom INT PRIMARY KEY
+CREATE TABLE garcom (
+   id_garcom INT IDENTITY(1,1) NOT NULL,
+   PRIMARY KEY(id_garcom)
 );
 
-CREATE TABLE Funcionario (
-    Salario DECIMAL(10,2,
-    Setor VARCHAR,
-    Status BOOLEAN,
-    fk_Estabelecimento_ID INT
+CREATE TABLE estabelecimento (
+   id_estabelecimento INT IDENTITY(1,1) NOT NULL,
+   nome VARCHAR(255),
+   setor INT NOT NULL,
+   PRIMARY KEY(id_estabelecimento)
 );
 
-CREATE TABLE Cliente  (
-    data_da_ultima_visita DATE,
-    Pontos INT
+CREATE TABLE funcionario (
+   id_funcionario INT IDENTITY(1,1) NOT NULL,
+   salario DECIMAL(10,2) NOT NULL,
+   setor INT NOT NULL,
+   status BOOLEAN,
+   id_estabelecimento_func INT, -- Adicionado para a FK
+   PRIMARY KEY(id_funcionario),
+   FOREIGN KEY (id_estabelecimento_func) REFERENCES estabelecimento(id_estabelecimento)
 );
 
-CREATE TABLE Registro (
-    Nome VARCHAR,
-    data_de_nascimento DATE,
-    CPF VARCHAR PRIMARY KEY,
-    Email VARCHAR,
-    Telefone VARCHAR
+CREATE TABLE cliente (
+   data_da_ultima_visita DATE NOT NULL,
+   pontos INT NOT NULL
 );
 
-CREATE TABLE Estabelecimento (
-    ID INT PRIMARY KEY,
-    NOME VARCHAR,
-    Setor VARCHAR
+CREATE TABLE registro (
+   nome VARCHAR(255) NOT NULL,
+   data_de_nascimento DATE NOT NULL,
+   CPF VARCHAR(11) NOT NULL,
+   email VARCHAR(255) NOT NULL,
+   telefone VARCHAR(11) NOT NULL,
+   PRIMARY KEY(CPF)
 );
 
-CREATE TABLE Agendar consulta (
-    fk_Recepcionista_ID_Recepcionista INT,
-    fk_Paciente_ID_Paciente INT
+CREATE TABLE agendar_consulta (
+   fk_recepcionista_id_recepcionista INT,
+   fk_paciente_id_paciente INT,
+   FOREIGN KEY(fk_recepcionista_id_recepcionista) REFERENCES recepcionista(id_recepcionista),
+   FOREIGN KEY(fk_paciente_id_paciente) REFERENCES paciente(id_paciente)
 );
 
-CREATE TABLE Inscrever-se (
-    fk_Participante_ID_Participante INT,
-    fk_Inscrição_ID_Inscrição INT
+CREATE TABLE inscrever_se (
+   fk_participante_id_participante INT,
+   fk_inscricao_id_inscricao INT,
+   FOREIGN KEY(fk_participante_id_participante) REFERENCES participante(id_participante),
+   FOREIGN KEY(fk_inscricao_id_inscricao) REFERENCES inscricao(id_inscricao)
 );
 
-CREATE TABLE Senta (
-    fk_Mesa_ID_Mesa INT,
-    fk_Cliente_Restaurante_ID_Cliente INT
+CREATE TABLE senta (
+   fk_mesa_id_mesa INT,
+   fk_cliente_restaurante_id_cliente INT,
+   FOREIGN KEY(fk_mesa_id_mesa) REFERENCES mesa(id_mesa),
+   FOREIGN KEY(fk_cliente_restaurante_id_cliente) REFERENCES client_restaurante(id_cliente)
 );
 
-CREATE TABLE Compõe (
-    fk_Item_ID_Item INT,
-    fk_Pedido_ID_Pedido INT
+CREATE TABLE compoe (
+   fk_item_id_item INT,
+   fk_pedido_id_pedido INT,
+   FOREIGN KEY(fk_item_id_item) REFERENCES item(id_item),
+   FOREIGN KEY(fk_pedido_id_pedido) REFERENCES pedido(id_pedido)
 );
 
-CREATE TABLE Atende (
-    fk_Garçom_ID_Garçom INT,
-    fk_Mesa_ID_Mesa INT
+CREATE TABLE atende (
+   fk_garcom_id_garcom INT,
+   fk_mesa_id_mesa INT,
+   FOREIGN KEY(fk_garcom_id_garcom) REFERENCES garcom(id_garcom),
+   FOREIGN KEY(fk_mesa_id_mesa) REFERENCES mesa(id_mesa)
 );
- 
-ALTER TABLE Paciente ADD CONSTRAINT FK_Paciente_2
-    FOREIGN KEY (fk_Cliente _fk_Registro_CPF???)
-    REFERENCES ??? (???)
-    ON DELETE CASCADE;
- 
-ALTER TABLE Paciente ADD CONSTRAINT FK_Paciente_3
-    FOREIGN KEY (fk_Plano de Saúde_ID_Plano)
-    REFERENCES Plano de Saúde (ID_Plano)
-    ON DELETE CASCADE;
- 
-ALTER TABLE Consulta ADD CONSTRAINT FK_Consulta_2
-    FOREIGN KEY (fk_Médico_ID_Medico)
-    REFERENCES Médico (ID_Medico)
-    ON DELETE CASCADE;
- 
-ALTER TABLE Consulta ADD CONSTRAINT FK_Consulta_3
-    FOREIGN KEY (fk_Paciente_ID_Paciente, fk_Paciente_fk_Cliente _fk_Registro_CPF???)
-    REFERENCES Paciente (ID_Paciente, ???)
-    ON DELETE CASCADE;
- 
-ALTER TABLE Consulta ADD CONSTRAINT FK_Consulta_4
-    FOREIGN KEY (fk_Recepcionista_ID_Recepcionista, fk_Recepcionista_fk_Funcionario_fk_Registro_CPF???)
-    REFERENCES Recepcionista (ID_Recepcionista, ???)
-    ON DELETE CASCADE;
- 
-ALTER TABLE Evento ADD CONSTRAINT FK_Evento_2
-    FOREIGN KEY (fk_Local_ID_Local)
-    REFERENCES Local (ID_Local)
-    ON DELETE CASCADE;
- 
-ALTER TABLE Participante ADD CONSTRAINT FK_Participante_2
-    FOREIGN KEY (fk_Cliente _fk_Registro_CPF???)
-    REFERENCES ??? (???)
-    ON DELETE CASCADE;
- 
-ALTER TABLE Inscrição ADD CONSTRAINT FK_Inscrição_2
-    FOREIGN KEY (fk_Evento_ID_Evento)
-    REFERENCES Evento (ID_Evento)
-    ON DELETE CASCADE;
- 
-ALTER TABLE Cliente_Restaurante ADD CONSTRAINT FK_Cliente_Restaurante_2
-    FOREIGN KEY (fk_Cliente _fk_Registro_CPF???)
-    REFERENCES ??? (???)
-    ON DELETE CASCADE;
- 
-ALTER TABLE Pedido ADD CONSTRAINT FK_Pedido_2
-    FOREIGN KEY (fk_Cliente_Restaurante_ID_Cliente, fk_Cliente_Restaurante_fk_Cliente _fk_Registro_CPF???)
-    REFERENCES Cliente_Restaurante (ID_Cliente, ???)
-    ON DELETE RESTRICT;
- 
-ALTER TABLE Para Viagem ADD CONSTRAINT FK_Para Viagem_2
-    FOREIGN KEY (fk_Pedido_ID_Pedido)
-    REFERENCES Pedido (ID_Pedido)
-    ON DELETE CASCADE;
- 
-ALTER TABLE Consumo Local ADD CONSTRAINT FK_Consumo Local_2
-    FOREIGN KEY (fk_Pedido_ID_Pedido)
-    REFERENCES Pedido (ID_Pedido)
-    ON DELETE CASCADE;
- 
-ALTER TABLE Consumo Local ADD CONSTRAINT FK_Consumo Local_3
-    FOREIGN KEY (fk_Mesa_ID_Mesa)
-    REFERENCES Mesa (ID_Mesa)
-    ON DELETE RESTRICT;
- 
-ALTER TABLE Garçom ADD CONSTRAINT FK_Garçom_2
-    FOREIGN KEY (fk_Funcionario_fk_Registro_CPF???)
-    REFERENCES ??? (???)
-    ON DELETE CASCADE;
- 
-ALTER TABLE Funcionario ADD CONSTRAINT FK_Funcionario_1
-    FOREIGN KEY (fk_Registro_CPF)
-    REFERENCES Registro (CPF)
-    ON DELETE CASCADE;
- 
-ALTER TABLE Funcionario ADD CONSTRAINT FK_Funcionario_2
-    FOREIGN KEY (fk_Estabelecimento_ID)
-    REFERENCES Estabelecimento (ID)
-    ON DELETE CASCADE;
- 
-ALTER TABLE Cliente  ADD CONSTRAINT FK_Cliente _1
-    FOREIGN KEY (fk_Registro_CPF)
-    REFERENCES Registro (CPF)
-    ON DELETE CASCADE;
- 
-ALTER TABLE Agendar consulta ADD CONSTRAINT FK_Agendar consulta_1
-    FOREIGN KEY (fk_Recepcionista_ID_Recepcionista, fk_Recepcionista_fk_Funcionario_fk_Registro_CPF???)
-    REFERENCES Recepcionista (ID_Recepcionista, ???)
-    ON DELETE SET NULL;
- 
-ALTER TABLE Agendar consulta ADD CONSTRAINT FK_Agendar consulta_2
-    FOREIGN KEY (fk_Paciente_ID_Paciente, fk_Paciente_fk_Cliente _fk_Registro_CPF???)
-    REFERENCES Paciente (ID_Paciente, ???)
-    ON DELETE SET NULL;
- 
-ALTER TABLE Inscrever-se ADD CONSTRAINT FK_Inscrever-se_1
-    FOREIGN KEY (fk_Participante_ID_Participante, fk_Participante_fk_Cliente _fk_Registro_CPF???)
-    REFERENCES Participante (ID_Participante, ???)
-    ON DELETE RESTRICT;
- 
-ALTER TABLE Inscrever-se ADD CONSTRAINT FK_Inscrever-se_2
-    FOREIGN KEY (fk_Inscrição_ID_Inscrição)
-    REFERENCES Inscrição (ID_Inscrição)
-    ON DELETE SET NULL;
- 
-ALTER TABLE Senta ADD CONSTRAINT FK_Senta_1
-    FOREIGN KEY (fk_Mesa_ID_Mesa)
-    REFERENCES Mesa (ID_Mesa)
-    ON DELETE SET NULL;
- 
-ALTER TABLE Senta ADD CONSTRAINT FK_Senta_2
-    FOREIGN KEY (fk_Cliente_Restaurante_ID_Cliente, fk_Cliente_Restaurante_fk_Cliente _fk_Registro_CPF???)
-    REFERENCES Cliente_Restaurante (ID_Cliente, ???)
-    ON DELETE SET NULL;
- 
-ALTER TABLE Compõe ADD CONSTRAINT FK_Compõe_1
-    FOREIGN KEY (fk_Item_ID_Item)
-    REFERENCES Item (ID_Item)
-    ON DELETE RESTRICT;
- 
-ALTER TABLE Compõe ADD CONSTRAINT FK_Compõe_2
-    FOREIGN KEY (fk_Pedido_ID_Pedido)
-    REFERENCES Pedido (ID_Pedido)
-    ON DELETE SET NULL;
- 
-ALTER TABLE Atende ADD CONSTRAINT FK_Atende_1
-    FOREIGN KEY (fk_Garçom_ID_Garçom, fk_Garçom_fk_Funcionario_fk_Registro_CPF???)
-    REFERENCES Garçom (ID_Garçom, ???)
-    ON DELETE RESTRICT;
- 
-ALTER TABLE Atende ADD CONSTRAINT FK_Atende_2
-    FOREIGN KEY (fk_Mesa_ID_Mesa)
-    REFERENCES Mesa (ID_Mesa)
-    ON DELETE SET NULL;
