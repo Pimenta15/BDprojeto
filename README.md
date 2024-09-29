@@ -8,7 +8,7 @@ Este projeto consiste em um modelo de banco de dados completo para um shopping u
 
   **Requisitos Mínimos:**
 Os requisitos mínimos implementados foram definidos para cada um dos casos a seguir:
-
+<hr>
 Caso 1 - Sistema de Gerenciamento da Clínica Médica
 Objetivo: Desenvolver um sistema de gerenciamento de uma clínica médica usando MER.
 
@@ -26,7 +26,7 @@ Requisitos:
 
 
 ![PngDoBD](https://github.com/Pimenta15/BDprojeto/blob/master/Caso1.png)
-
+<hr>
 Caso 2 - Sistema de Gerenciamento de Eventos
 Objetivo: Criar um sistema de gestão de eventos usando MER.
 
@@ -44,7 +44,7 @@ Requisitos:
 
 
 ![PngDoBD](https://github.com/Pimenta15/BDprojeto/blob/master/Caso2.png)
-
+<hr>
 Caso 3 - Sistema de Gerenciamento de Restaurante
 Objetivo: Desenvolver um sistema de gerenciamento para um restaurante usando MER.
 
@@ -87,7 +87,15 @@ A inclusão dessas novas entidades e funcionalidades visa aumentar a eficiência
 
   Este projeto oferece uma base sólida para a gestão de um shopping, permitindo a expansão futura com novas funcionalidades. O sistema de fidelidade e as novas entidades são adições valiosas que podem aumentar a frequência de clientes e melhorar a experiência geral.
 
-  ![lexTreinador](https://github.com/Pimenta15/BDprojeto/blob/master/lex.jpg)
+  <br>
+  <hr>
+  **Perguntas que o nosso DB consegue responder:**
+  1) Como identificar qual é o estabelecimento com a maior frequencia de visitantes?
+  2) Como identificar quais pedidos são para comer dentro e fora do shopping?
+  3) Como relacionar clientes frequentes utilizando o programa de fidelidade?
+  4) Como saber quais são os pedidos que mais saem?
+  5) Qual é a pocetagem de pessoas por evento?
 
-
-  
+**Como pegar a cartinha do Deus Lex?**
+![lexTreinador](https://github.com/Pimenta15/BDprojeto/blob/master/lex.jpg)
+  Vá em todos os estabelecimentos e faça um pedido pegando o primeiro item do cardápio :)
