@@ -86,16 +86,22 @@ A inclusão dessas novas entidades e funcionalidades visa aumentar a eficiência
 **Conclusão:**
 
   Este projeto oferece uma base sólida para a gestão de um shopping, permitindo a expansão futura com novas funcionalidades. O sistema de fidelidade e as novas entidades são adições valiosas que podem aumentar a frequência de clientes e melhorar a experiência geral.
-
-  <br>
   <hr>
-  **Perguntas que o nosso DB consegue responder:**
+  
+**Perguntas**
   1) Como identificar qual é o estabelecimento com a maior frequencia de visitantes?
+  
   2) Como identificar quais pedidos são para comer dentro e fora do shopping?
+     
   3) Como relacionar clientes frequentes utilizando o programa de fidelidade?
+     
   4) Como saber quais são os pedidos que mais saem?
+     
   5) Qual é a pocetagem de pessoas por evento?
+<hr>
 
 **Como pegar a cartinha do Deus Lex?**
+<br>
 ![lexTreinador](https://github.com/Pimenta15/BDprojeto/blob/master/lex.jpg)
-  Vá em todos os estabelecimentos e faça um pedido pegando o primeiro item do cardápio :)
+<br>
+ Vá em todos os estabelecimentos e faça um pedido pegando o primeiro item do cardápio :)
