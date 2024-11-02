@@ -217,29 +217,21 @@ ORDER BY
 
 -- As comidas saem mais em dias de eventos são diferentes dos dias que não tem eventos?
 
-WITH PedidosEventos AS (
-    SELECT 
-        p.id_pedido,
-        i.descricao,
-        e.id_evento IS NOT NULL AS dia_evento
-    FROM 
-        pedido AS p
-    LEFT JOIN 
-        compoe AS c ON p.id_pedido = c.fk_pedido_id_pedido
-    LEFT JOIN 
-        item AS i ON c.fk_item_id_item = i.id_item
-    LEFT JOIN 
-        evento AS e ON p.data_pedido BETWEEN e.data_inicio AND e.data_fim
-)
-
 SELECT 
-    descricao,
-    dia_evento,
+    i.descricao,
+    (e.id_evento IS NOT NULL) AS dia_evento,
     COUNT(*) AS quantidade_vendida
 FROM 
-    PedidosEventos
+    pedido AS p
+LEFT JOIN 
+    compoe AS c ON p.id_pedido = c.fk_pedido_id_pedido
+LEFT JOIN 
+    item AS i ON c.fk_item_id_item = i.id_item
+LEFT JOIN 
+    evento AS e ON p.data_pedido BETWEEN e.data_inicio AND e.data_fim
 GROUP BY 
-    descricao, dia_evento
+    i.descricao, (e.id_evento IS NOT NULL)
 ORDER BY 
-    quantidade_vendida DESC, descricao;
+    quantidade_vendida DESC, i.descricao;
+
 
