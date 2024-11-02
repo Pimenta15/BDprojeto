@@ -204,7 +204,12 @@ SELECT
     i.descricao,
     COUNT(c.fk_item_id_item) AS quantidade_pedidos_para_viagem
 FROM 
-    item AS i JOIN compoe AS c ON i.id_item = c.fk_item_id_item JOIN para_viagem AS pv ON c.fk_pedido_id_pedido = pv.id_para_viagem
+    item AS i 
+
+JOIN compoe AS c ON i.id_item = c.fk_item_id_item 
+
+JOIN para_viagem AS pv ON c.fk_pedido_id_pedido = pv.id_para_viagem
+
 GROUP BY 
     i.id_item, i.descricao
 ORDER BY 
