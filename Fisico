@@ -215,7 +215,7 @@ GROUP BY
 ORDER BY 
     quantidade_pedidos_para_viagem DESC;
 
--- As comidas saem mais em dias de eventos são diferentes dos dias que não tem eventos?
+-- As comidas saem mais em dias de eventos são diferentes dos dias que não tem eventos? --
 
 SELECT 
     i.descricao,
@@ -234,4 +234,17 @@ GROUP BY
 ORDER BY 
     quantidade_vendida DESC, i.descricao;
 
+-- Em dia de eventos aumenta o movimento na unidade médica? --
+
+SELECT 
+    e.id_evento IS NOT NULL AS dia_com_evento,
+    COUNT(c.id_consulta) AS total_consultas
+FROM 
+    consulta AS c
+LEFT JOIN 
+    evento AS e ON c.data_consulta BETWEEN e.data_inicio AND e.data_fim
+GROUP BY 
+    e.id_evento IS NOT NULL
+ORDER BY 
+    dia_com_evento DESC;
 
