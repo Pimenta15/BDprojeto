@@ -189,73 +189,44 @@ CREATE TABLE atende (
 
 -- Quais são os planos de saúde mais cogitados?
 
-SELECT 
-    ps.nome_plano, ps.corbertura, COUNT(p.id_paciente) AS total_pacientes
-FROM 
-    plano_saude AS ps
-LEFT JOIN 
-    paciente AS p ON ps.id_plano = p.id_paciente_plano
-GROUP BY 
-    ps.id_plano, ps.nome_plano, ps.corbertura
-ORDER BY 
-    total_pacientes DESC;
+SELECT ps.nome_plano, ps.corbertura, COUNT(p.id_paciente) AS total_pacientes
+FROM plano_saude AS ps
+LEFT JOIN paciente AS p ON ps.id_plano = p.id_paciente_plano
+GROUP BY ps.id_plano, ps.nome_plano, ps.corbertura
+ORDER BY total_pacientes DESC;
 
 
 
 -- Quais são os pedidos que mais saem para viagem?
 
-SELECT 
-    i.descricao,
-    COUNT(c.fk_item_id_item) AS quantidade_pedidos_para_viagem
-FROM 
-    item AS i 
-
+SELECT i.descricao,COUNT(c.fk_item_id_item) AS quantidade_pedidos_para_viagem
+FROM item AS i 
 JOIN compoe AS c ON i.id_item = c.fk_item_id_item 
-
 JOIN para_viagem AS pv ON c.fk_pedido_id_pedido = pv.id_para_viagem
-
-GROUP BY 
-    i.id_item, i.descricao
-ORDER BY 
-    quantidade_pedidos_para_viagem DESC;
+GROUP BY i.id_item, i.descricao
+ORDER BY quantidade_pedidos_para_viagem DESC;
 
 -- As comidas saem mais em dias de eventos são diferentes dos dias que não tem eventos? --
 
-SELECT 
-    i.descricao,
-    (e.id_evento IS NOT NULL) AS dia_evento,
-    COUNT(*) AS quantidade_vendida
-FROM 
-    pedido AS p
-LEFT JOIN 
-    compoe AS c ON p.id_pedido = c.fk_pedido_id_pedido
-LEFT JOIN 
-    item AS i ON c.fk_item_id_item = i.id_item
-LEFT JOIN 
-    evento AS e ON p.data_pedido BETWEEN e.data_inicio AND e.data_fim
-GROUP BY 
-    i.descricao, (e.id_evento IS NOT NULL)
-ORDER BY 
-    quantidade_vendida DESC, i.descricao;
+SELECT i.descricao, (e.id_evento IS NOT NULL) AS dia_evento, COUNT(*) AS quantidade_vendida
+FROM pedido AS p
+LEFT JOIN compoe AS c ON p.id_pedido = c.fk_pedido_id_pedido
+LEFT JOIN item AS i ON c.fk_item_id_item = i.id_item
+LEFT JOIN evento AS e ON p.data_pedido BETWEEN e.data_inicio AND e.data_fim
+GROUP BY i.descricao, (e.id_evento IS NOT NULL)
+ORDER BY quantidade_vendida DESC, i.descricao;
 
 -- Em dia de eventos aumenta o movimento na unidade médica? --
 
-SELECT 
-    e.id_evento IS NOT NULL AS dia_com_evento,
-    COUNT(c.id_consulta) AS total_consultas
-FROM 
-    consulta AS c
-LEFT JOIN 
-    evento AS e ON c.data_consulta BETWEEN e.data_inicio AND e.data_fim
-GROUP BY 
-    e.id_evento IS NOT NULL
-ORDER BY 
-    dia_com_evento DESC;
+SELECT e.id_evento IS NOT NULL AS dia_com_evento, COUNT(c.id_consulta) AS total_consultas
+FROM consulta AS c
+LEFT JOIN evento AS e ON c.data_consulta BETWEEN e.data_inicio AND e.data_fim
+GROUP BY e.id_evento IS NOT NULL
+ORDER BY dia_com_evento DESC;
 
 
 
  -- Qual a quantidade media de pessoa por evento --
-
 
  SELECT AVG(contagem_participantes) AS media_participantes
  FROM (
@@ -266,11 +237,40 @@ ORDER BY
 
 
 -- A frequencia de visitantes é maior quando tem eventos --
-SELECT COUNT(id_cliente) as clientes , data_da_ultima_visita FROM cliente 
+
+SELECT COUNT(id_cliente) as clientes , data_da_ultima_visita 
+FROM cliente 
 GROUP BY data_da_ultima_visita
+
 -- mostra todos os clientes de um certo dia --
-SELECT id_inscricao_evento, COUNT(id_inscricao) AS contagem_participantes FROM inscricao
+
+SELECT id_inscricao_evento, COUNT(id_inscricao) AS contagem_participantes 
+FROM inscricao
 GROUP BY id_inscricao_evento
-  
 
+-- Restaurante com a maior frêquencia de visitantes --
 
+SELECT e.nome, COUNT(*) AS frequencia
+FROM estabelecimento e
+JOIN funcionario f ON e.id_estabelecimento = f.id_estabelecimento_func
+GROUP BY e.nome
+ORDER BY frequencia DESC
+LIMIT 1;  
+
+-- Quais pedidos são para comer dentro e fora do shopping? --
+
+SELECT p.id_pedido, 
+       CASE 
+           WHEN cl.id_cliente IS NOT NULL THEN 'Para Comer Dentro'
+           ELSE 'Para Viagem'
+       END AS tipo_pedido
+FROM pedido p
+LEFT JOIN consumo_local cl ON p.id_pedido = cl.id_consumo_pedido;
+
+-- Como relacionar clientes frequentes utilizando o programa de fidelidade? --
+SELECT r.CPF, COUNT(c.id_cliente) AS frequencia_visitas
+FROM registro r
+JOIN cliente c ON r.CPF = c.id_cliente
+WHERE c.pontos > 0
+GROUP BY r.CPF
+ORDER BY frequencia_visitas DESC;
