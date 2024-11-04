@@ -89,15 +89,28 @@ A inclusão dessas novas entidades e funcionalidades visa aumentar a eficiência
   <hr>
   
 **Perguntas**
-  1) Como identificar qual é o estabelecimento com a maior frequencia de visitantes?
-  
-  2) Como identificar quais pedidos são para comer dentro e fora do shopping?
-     
-  3) Como relacionar clientes frequentes utilizando o programa de fidelidade?
-     
-  4) Como saber quais são os pedidos que mais saem?
-     
-  5) Qual é a pocetagem de pessoas por evento?
+<ul>
+<li><a>Qual é o estabelecimento com a maior frequencia de visitantes?</a></li>
+
+<li><a>Quais pedidos são para comer dentro e fora do shopping?</a></li>
+
+<li><a>Como relacionar clientes frequentes utilizando o programa de fidelidade?</a></li>
+
+<li><a>Quais são os pedidos que mais saem?</a></li>
+
+<li><a>Qual a quantidade de pessoa média por evento?</a></li>
+
+<li><a>A frequência de visitantes é maior quando tem eventos?</a></li>
+
+<li><a>As comidas saem mais em dias de eventos são diferentes dos dias que não tem eventos?</a></li>
+
+<li><a>Em dia de eventos aumenta o movimento na unidade médica?</a></li>
+
+<li><a>Quais são os planos de saúde mais cogitados?</a></li>
+
+<li><a>Quais são os pedidos que mais saem para viagem?</a></li>
+</ul>
+
 <hr>
 
 **Como pegar a cartinha do Deus Lex?**
