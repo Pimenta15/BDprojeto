@@ -41,7 +41,9 @@ CREATE TABLE consulta(
 
 CREATE TABLE participante(
     id_participante INT IDENTITY(1,1) NOT NULL,
-    PRIMARY KEY(id_participante)
+    id_inscricao_evento INT, -- fk para fazer referencia a inscriçao -- 
+    PRIMARY KEY(id_participante),
+    FOREIGN KEY (id_inscricao_evento) REFERENCES inscricao(id_inscricao)
 );
 
 CREATE TABLE localizacao(
@@ -136,7 +138,9 @@ CREATE TABLE funcionario (
 
 CREATE TABLE cliente (
    data_da_ultima_visita DATE NOT NULL,
-   pontos INT NOT NULL
+   id_cliente VARCHAR(11) ,
+   pontos INT NOT NULL,
+   FOREIGN KEY (id_cliente) REFERENCES registro(CPF)
 );
 
 CREATE TABLE registro (
@@ -247,4 +251,26 @@ GROUP BY
     e.id_evento IS NOT NULL
 ORDER BY 
     dia_com_evento DESC;
+
+
+
+ -- Qual a quantidade media de pessoa por evento --
+
+
+ SELECT AVG(contagem_participantes) AS media_participantes
+ FROM (
+    SELECT id_inscricao_evento, COUNT(id_inscricao) AS contagem_participantes
+    FROM inscricao
+    GROUP BY id_inscricao_evento
+  ) ;
+
+
+-- A frequencia de visitantes é maior quando tem eventos --
+SELECT COUNT(id_cliente) as clientes , data_da_ultima_visita FROM cliente 
+GROUP BY data_da_ultima_visita
+-- mostra todos os clientes de um certo dia --
+SELECT id_inscricao_evento, COUNT(id_inscricao) AS contagem_participantes FROM inscricao
+GROUP BY id_inscricao_evento
+  
+
 
