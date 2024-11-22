@@ -118,5 +118,18 @@ A inclusão dessas novas entidades e funcionalidades visa aumentar a eficiência
 ![lexTreinador](https://github.com/Pimenta15/BDprojeto/blob/master/lex.jpg)
 <br>
  Vá em todos os estabelecimentos e faça um pedido pegando o primeiro item do cardápio :)
+<hr>
+
+**Diagrama de pastas (Arquitetura MVC)**
+
+<p> Application = É onde fica todo o projeto em si e dentro dela vem ta lógica de comunicação do MVC e da conexão com o DB </p>
 <br>
+<p> Controller = É onde fica todas as controllers que vão se comunicar com o BD, enviar os dados para a view e acessa=lás</p>
+<br>
+<p> Models = É onde fica toda a lógica de requisição de dados ao banco de dados. </p>
+<br>
+<p> View = É onde fica toda a parte onde o usuário vai interagir com a aplicação. (Cada tabela tem sua própria pasta para evitar confusões)</p>
+<hr>
+
 **Para utilizar o CodeIgniter, antes lembre dar uma run no banco de dados no PHPMyAdmin**
+<li><a>acesse o localhost/CodeIgniterProj e é só testar :)</a></li>
