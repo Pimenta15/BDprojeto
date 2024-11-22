@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class plano_saude extends CI_Model
+class plano_saude_model extends CI_Model
 {
     public function __construct()
     {
