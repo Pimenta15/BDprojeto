@@ -34,4 +34,11 @@ class Medico_model extends CI_Model
         $query = $this->db->get('medico');
         return $query->result_array();
     }
+
+    public function get_user_by_CRM($CRM)
+    {
+        $query = $this->db->get_where('medico', ['CRM' => $CRM]);
+        return $query->row_array();
+    }
+    
 }
