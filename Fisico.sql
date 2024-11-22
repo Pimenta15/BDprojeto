@@ -9,7 +9,7 @@ CREATE TABLE plano_saude(
     id_plano INT IDENTITY(1,1) NOT NULL,
     nome_plano VARCHAR(20) NOT NULL,
     corbertura VARCHAR(20) NOT NULL,
-    mesalidade DECIMAL(10,2) NOT NULL,
+    mensalidade DECIMAL(10,2) NOT NULL,
     PRIMARY KEY(id_plano)
 );
 
@@ -95,6 +95,7 @@ CREATE TABLE pedido ( --na vdd é item--
 
 CREATE TABLE item (
     id_item INT IDENTITY(1,1) NOT NULL,
+    nome_item VARCHAR(100),
     descricao VARCHAR(255),
     preco DECIMAL(10,2),
     quantidade INT NOT NULL,
