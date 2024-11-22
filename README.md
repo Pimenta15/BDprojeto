@@ -118,3 +118,5 @@ A inclusão dessas novas entidades e funcionalidades visa aumentar a eficiência
 ![lexTreinador](https://github.com/Pimenta15/BDprojeto/blob/master/lex.jpg)
 <br>
  Vá em todos os estabelecimentos e faça um pedido pegando o primeiro item do cardápio :)
+<br>
+**Para utilizar o CodeIgniter, antes lembre dar uma run no banco de dados no PHPMyAdmin**
