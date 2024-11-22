@@ -1,17 +1,29 @@
-CREATE TABLE medico(
-    id_medico INT IDENTITY(1,1) NOT NULL,
-    CRM VARCHAR(10) NOT NULL,
-    espec VARCHAR(100) NOT NULL,
-    PRIMARY KEY(id_medico)
+CREATE TABLE medicos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    especialidade VARCHAR(100) NOT NULL,
+    crm VARCHAR(20) NOT NULL
 );
 
-CREATE TABLE plano_saude(
-    id_plano INT IDENTITY(1,1) NOT NULL,
-    nome_plano VARCHAR(20) NOT NULL,
-    corbertura VARCHAR(20) NOT NULL,
-    mensalidade DECIMAL(10,2) NOT NULL,
-    PRIMARY KEY(id_plano)
-);
+CREATE TABLE plano_saude( 
+    id_plano INT AUTO_INCREMENT PRIMARY KEY, 
+    nome_plano VARCHAR(20) NOT NULL, 
+    corbertura VARCHAR(20) NOT NULL, 
+    mensalidade DECIMAL(10,2) NOT NULL
+    );
+
+CREATE TABLE localizacao( 
+    id_localizacao INT AUTO_INCREMENT PRIMARY KEY, 
+    nome_local VARCHAR(255) NOT NULL, 
+    capacidade INT NOT NULL
+    );
+
+CREATE TABLE item ( 
+    id_item INT AUTO_INCREMENT PRIMARY KEY, 
+    nome_item VARCHAR(100), 
+    descricao VARCHAR(255), 
+    preco DECIMAL(10,2), 
+    quantidade INT NOT NULL );
 
 CREATE TABLE paciente(
     id_paciente INT IDENTITY(1,1) NOT NULL,
@@ -91,15 +103,6 @@ CREATE TABLE pedido ( --na vdd é item--
     id_pedido_cliente INT, -- Adicionado para a FK
     PRIMARY KEY(id_pedido),
     FOREIGN KEY (id_pedido_cliente) REFERENCES client_restaurante(id_cliente)
-);
-
-CREATE TABLE item (
-    id_item INT IDENTITY(1,1) NOT NULL,
-    nome_item VARCHAR(100),
-    descricao VARCHAR(255),
-    preco DECIMAL(10,2),
-    quantidade INT NOT NULL,
-    PRIMARY KEY(id_item)
 );
 
 CREATE TABLE para_viagem (
